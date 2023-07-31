@@ -98,9 +98,12 @@ type Configuration struct {
 }
 
 // NewConfiguration returns a new Configuration object
-func NewConfiguration() *Configuration {
+func NewConfiguration(token string) *Configuration {
+	header := make(map[string]string, 0)
+	header["Authorization"] = "Bearer " + token
+
 	cfg := &Configuration{
-		DefaultHeader: make(map[string]string),
+		DefaultHeader: header,
 		UserAgent:     "OpenAPI-Generator/1.0.0/go",
 		Debug:         false,
 		Servers: ServerConfigurations{
